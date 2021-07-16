@@ -98,7 +98,7 @@ class HapPyMongo(object):
             config['MONGO_DATABASE'] = parsed['database']
             config['MONGO_USERNAME'] = parsed['username']
             config['MONGO_PASSWORD'] = parsed['password']
-            for option, value in parsed['options'].iteritems():
+            for option, value in parsed['options'].items():
                 kwargs.setdefault(option, value)
 
             # we will use the URI for connecting instead of HOST/PORT
@@ -133,12 +133,9 @@ class HapPyMongo(object):
         database = config.get('MONGO_DATABASE')
 
         kwargs['host'] = host
-
-        # Instantiate the correct pymongo client for replica sets or not
-        if kwargs.get('replicaSet'):
-            cls = pymongo.MongoReplicaSetClient
-        else:
-            cls = pymongo.MongoClient
+        kwargs['username'] = username
+        kwargs['password'] = password
+        cls = pymongo.MongoClient
 
         # Instantiate the class using the kwargs obtained from and set
         # in MONGO_KWARGS
@@ -147,8 +144,8 @@ class HapPyMongo(object):
         db = mongo[database]
 
         # Auth with the DB if username and password were provided
-        if any(auth):
-            db.authenticate(username, password)
+        # if any(auth):
+        #     db.authenticate(username, password)
 
         if is_flask:
             if not hasattr(app_or_object_or_dict, 'extensions'):
