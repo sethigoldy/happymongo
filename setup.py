@@ -7,7 +7,7 @@ with open('README.rst') as f:
 
 setuptools.setup(
     name='happymongo-py3',
-    version='0.1.2',
+    version='0.1.3',
     description=('Python module for making it easy and consistent to '
                  'connect to MongoDB via PyMongo either in Flask or in'
                  ' a non-flask application'),
@@ -17,5 +17,5 @@ setuptools.setup(
     url='https://github.com/sivel/happymongo',
     license='Apache License, Version 2.0',
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
-    install_requires=['pymongo==3.7']
+    install_requires=['pymongo']
 )
